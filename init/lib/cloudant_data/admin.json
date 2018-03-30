@@ -1,0 +1,12 @@
+{
+  "_id": "admin",
+  "userid": "admin",
+  "password": "password000",
+  "group": [
+    "user",
+    "maint",
+    "admin"
+  ],
+  "create_date": "2018-01-01 00:00:00.000",
+  "flag": 1
+}

@@ -1,0 +1,15 @@
+{
+  "_id": "_design/login_userDesignDocV1",
+  "views": {
+    "login_userAllSearch": {
+      "map": "function (doc) {\n  emit(doc._id, {userid: doc.userid, password: doc.password, group: doc.group, create_date: doc.create_date, modify_date: doc.modify_date, user: doc.user, flag: doc.flag});\n}"
+    }
+  },
+  "language": "javascript",
+  "indexes": {
+    "login_userSearch": {
+      "analyzer": "standard",
+      "index": "function (doc) {\n  index(\"userid\", doc.userid, {store: true});\n}"
+    }
+  }
+}

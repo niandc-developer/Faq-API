@@ -1,0 +1,22 @@
+{
+  "_id": "_design/qa_docDesignDocV1",
+  "views": {
+    "qa_docFlagSearch": {
+      "map": "function (doc) {\n  if (doc.flag >= 1 && doc.flag <= 99) {\n    var key = parseInt(doc.id);\n    emit(key, {id: doc.id, question: doc.question, answer: doc.answer, url: doc.url});\n  }\n}"
+    },
+    "qa_docAllSearch": {
+      "map": "function (doc) {\n  var key = parseInt(doc.id);\n  emit(key, {id: doc.id, question: doc.question, answer: doc.answer, url: doc.url, create_date: doc.create_date, flag: doc.flag, user: doc.user, modify_date: doc.modify_date});\n}"
+    },
+    "qa_docStats": {
+      "reduce": "_stats",
+      "map": "function (doc) {\n  var value = parseInt(doc._id);\n  emit(null, value);\n}"
+    }
+  },
+  "language": "javascript",
+  "indexes": {
+    "qa_docSearch": {
+      "analyzer": "japanese",
+      "index": "function (doc) {\n  index(\"question\", doc.question, {store: true});\n  index(\"answer\", doc.answer, {store: true});\n}"
+    }
+  }
+}

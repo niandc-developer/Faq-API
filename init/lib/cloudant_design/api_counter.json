@@ -1,0 +1,10 @@
+{
+  "_id": "_design/api_counterDesignDocV1",
+  "views": {
+    "count": {
+      "map": "function (doc) {\n  if (doc.timestampOfMili) {\n    date = new Date(doc.timestampOfMili);\n    emit(\n      [\n        doc.api,\n        date.getFullYear(),\n        date.getMonth()+1,\n        date.getDate(),\n        // date.getHours(),\n        // date.getMinutes(),\n        // date.getSeconds(),\n        doc.user\n      ],\n      1\n    );\n  }\n}",
+      "reduce": "_count"
+    }
+  },
+  "language": "javascript"
+}

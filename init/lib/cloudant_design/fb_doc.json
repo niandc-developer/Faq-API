@@ -1,0 +1,39 @@
+{
+  "_id": "_design/fb_docDesignDocV1",
+  "views": {
+    "fb_docFlagSearch": {
+      "map": "function (doc) {\n  if (doc.flag >= 1 && doc.flag <= 99) {\n    emit(doc._id, {id: doc.id, question: doc.question, answerid: doc.answer[0].id, relevance: doc.answer[0].relevance});\n  }\n}"
+    },
+    "fb_docAllSearch": {
+      "map": "function (doc) {\n  var key = 0;\n  if (doc.answer[0].relevance === undefined || doc.answer[0].relevance === \"\") {\n    key = -1;\n  } else if (doc.answer[0].id !== \"\") {\n    key = parseInt(doc.answer[0].id);\n  }\n  emit(key, {id: doc.id, question: doc.question, answer: doc.answer, create_date: doc.create_date, modify_date: doc.modify_date, user: doc.user, flag: doc.flag});\n}"
+    },
+    "fb_docStats": {
+      "reduce": "_stats",
+      "map": "function (doc) {\n  var value = parseInt(doc._id);\n  emit(null, value);\n}"
+    },
+    "fb_docRankerSearch": {
+      "map": "function (doc) {\n  if (doc.flag >= 1 && doc.flag < 99) {\n    emit(doc._id, {id: doc.id, question: doc.question, answerid: doc.answer[0].id, relevance: doc.answer[0].relevance});\n  }\n}"
+    },
+    "fb_docNoAnswer": {
+      "map": "function (doc) {\n  if (doc.answer[0].id === \"\" || doc.answer[0].id === undefined || doc.answer[0].id === \"NoAnswer\") {\n    emit(doc._id, {id: doc.id, question: doc.question, answer: doc.answer, create_date: doc.create_date, modify_date: doc.modify_date, user: doc.user, flag: doc.flag});\n  }\n}"
+    },
+    "fb_docIsAnswer": {
+      "map": "function (doc) {\n  if (doc.answer[0].id !== \"\" && doc.answer[0].id !== undefined && doc.answer[0].id !== \"NoAnswer\") {\n    emit(doc._id, {id: doc.id, question: doc.question, answer: doc.answer, create_date: doc.create_date, modify_date: doc.modify_date, user: doc.user, flag: doc.flag});\n  }\n}"
+    }
+  },
+  "language": "javascript",
+  "indexes": {
+    "fb_docSearch": {
+      "analyzer": {
+        "name": "perfield",
+        "default": "keyword",
+        "fields": {
+          "question": "japanese",
+          "answerid": "keyword",
+          "relevance": "keyword"
+        }
+      },
+      "index": "function (doc) {\n  index(\"question\", doc.question, {store: true});\n  index(\"answerid\", doc.answer[0].id, {store: true});\n  index(\"relevance\", doc.answer[0].relevance, {store: true});\n}"
+    }
+  }
+}
