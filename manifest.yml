@@ -1,0 +1,18 @@
+applications:
+- path: .
+  memory: 512M
+  instances: 1
+  domain: mybluemix.net
+  name: xxx-faqap01
+  host: xxx-faqap01
+  disk_quota: 1024M
+  services:
+  - xxx-faqap01-cloudantNoSQLDB
+  - xxx-faqdb01-cloudantNoSQLDB
+  env:
+    NODE_RED_STORAGE_NAME: xxx-faqap01-cloudantNoSQLDB
+    NODE_RED_APPLICATION_NAME: nic-faqap01
+    FAQ_ADMIN_USERNAME: faqAdmin
+    FAQ_ADMIN_PASSWORD: faqPassword
+    NODE_RED_USERNAME: redAdmin
+    NODE_RED_PASSWORD: redPassword

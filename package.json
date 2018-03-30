@@ -1,0 +1,36 @@
+{
+    "name"         : "Faq-Api",
+    "version"      : "1.0.0",
+    "dependencies": {
+        "when": "~3.x",
+        "nano": "6.2.x",
+        "bcrypt": "1.0.2",
+        "cfenv":"~1.0.0",
+        "express":"4.x",
+        "body-parser":"1.x",
+        "http-shutdown":"1.2.0",
+        "node-red": "0.17.x",
+        "node-red-bluemix-nodes":"1.x",
+        "node-red-node-watson":"0.x",
+        "node-red-node-openwhisk":"0.x",
+        "node-red-node-cf-cloudant":"0.x",
+        "node-red-contrib-scx-ibmiotapp":"0.x",
+        "node-red-nodes-cf-sqldb-dashdb":"0.x",
+        "async": "2.4.1",
+        "crypto-js": "^3.1.9-1",
+        "node-red-contrib-bigfile": "1.2.*",
+        "request": "^2.83.0"
+    },
+    "scripts": {
+        "start": "node --max-old-space-size=1024 index.js --settings ./bluemix-settings.js -v"
+    },
+    "repository": {
+      "type": "git",
+      "url": "https://git.ng.bluemix.net/teamwatson/nic-faq-api.git"
+    },
+    "author": "Nippon Information and Communication Corporation",
+    "license": "Apache-2.0",
+    "engines": {
+        "node": "6.x"
+    }
+}
