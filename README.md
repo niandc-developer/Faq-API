@@ -62,8 +62,10 @@ $ bx cf ssh xxx-faqap01 -c "sh /home/vcap/app/init/setup.sh"
 (4) 「管理コマンド」タブの コレクション作成 を実行すると、"faq_collection" という Discovery のコレクションが作成される(Faq-Api の標準コレクション)。
 ![2](init/img/CreateCollection.png)
 
-## Copyright and license
-Copyright 2018 Nippon Information and Communication. All Rights Reserved.
-```
-see ./LICENSE
-```
+## Copyright
+Copyright 2018 Nippon Information and Communication Corporation
+
+## License
+This sample code is licensed under Apache 2.0.
+
+Full license text is available in [LICENSE](LICENSE).
